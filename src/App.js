@@ -1,24 +1,39 @@
-import logo from './logo.svg';
+
 import './App.css';
+import Home from './Components/Home';
+
+import Login from './Components/Login';
+import SignUp from './Components/SignUp';
+import Services from './Components/Services';
+import Contact from './Components/Contact';
+import Request from './Components/Request';
+import { Route, BrowserRouter, Routes } from 'react-router-dom';
+import { useState } from 'react';
+import Main from './Components/Main';
 
 function App() {
+
+
+
+  const [flag, setFlag] = useState(false)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' exact element={<Home/>} />
+        <Route path='/login' exact element={<Login setFlag={setFlag}/>} />
+        <Route path='/signup' exact element={<SignUp/>} />
+        <Route path='/home' element={flag?<Main flag={flag} setFlag={setFlag} />:<Login setFlag={setFlag}/>} />
+      </Routes>
+    </BrowserRouter>
+    {/* <Login/> */}
+    {/* <SignUp/> */}
+    {/* <Home/>
+    <Request/>
+    <Services/>
+    <Contact/> */}
+    </>
   );
 }
 
